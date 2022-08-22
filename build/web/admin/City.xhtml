@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+          <ui:include src="../admin/Css.xhtml"></ui:include>
+        <ui:include src="../admin/Script.xhtml"></ui:include>
+        <ui:include src="../admin/SlidebarHeader.xhtml"></ui:include>
+        <ui:include src="../admin/Footer.xhtml"></ui:include>
+    </h:head>
+    <h:body>
+        <center>
+            <br/> <br/>
+            <font size="4">
+                <br/><br/>
+            <h:form>
+                <h:inputHidden value="#{Admin.city_id}" />
+                City Name : <h:inputText value="#{Admin.city_name}" /><br /><br />
+                State Name : <h:selectOneMenu value="#{Admin.state_id}" >
+                    <f:selectItem itemValue="0" itemLabel="Select State" />
+                    <c:forEach var="statemaster" items="#{Admin.state}">
+                        <f:selectItem itemValue="#{statemaster.stateId}" itemLabel="#{statemaster.stateName}" />
+                    </c:forEach>
+                </h:selectOneMenu><br /><br />
+                
+                
+                <h:commandButton value="Insert" action="#{Admin.addCityMaster()}" /><br /><br />
+                <h2>City Details</h2>
+                
+                <table border="2" width="40%">
+                   
+                    <tr>
+                      
+                        <th>City Id</th>
+                        <th>City Name</th>
+                        <th>State Name</th>
+                        <th>Action</th>
+                    </tr>
+                    <c:forEach var="city" items="#{Admin.citymaster}">
+                        <tr>
+                            <td>#{city.cityId}</td>
+                            <td>#{city.cityName}</td>
+                            <td>#{city.stateId.stateName}</td>
+                            
+                            <td>
+                                <h:commandLink value="Edit" action="#{Admin.updateCityMaster(city.cityId)}" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <h:commandLink value="Delete" action="#{Admin.removeCityMaster(city.cityId)}" />
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+                
+            </h:form>
+                </font>
+        </center>
+    </h:body>
+</html>

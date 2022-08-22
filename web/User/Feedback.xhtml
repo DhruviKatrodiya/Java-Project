@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+       
+       
+        <center>
+            <h1>Add Feedback</h1>
+            <h:form>
+                Comments : <h:inputText value="#{User.comments}"/><br/><br/>
+                <h:inputHidden value="#{User.feedback_id}"/>
+                <h:commandButton value="insert" action="#{User.addFeedback()}"/>
+        </h:form>
+                <br/><br/>
+            
+            <h1>Show Feedback</h1>
+        <h:form>
+            <h:dataTable var="feedback" value="#{User.feedback}" border="2">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel>Feedback Id</h:outputLabel>
+                        
+                    </f:facet>
+                    <h:outputText value="#{feedback.feedbackId}"/>
+                </h:column>
+                
+              
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel> Comments </h:outputLabel>
+                        
+                    </f:facet>
+                    <h:outputText value="#{feedback.comments}"/>
+                </h:column>
+                
+            </h:dataTable>
+        </h:form> 
+        </center>
+    </h:body>
+</html>
+

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <ui:include src="../admin/Css.xhtml"></ui:include>
+        <ui:include src="../admin/Script.xhtml"></ui:include>
+        <ui:include src="../admin/SlidebarHeader.xhtml"></ui:include>
+        <ui:include src="../admin/Footer.xhtml"></ui:include>
+    </h:head>
+    <h:body>
+        <center>
+             <font size="4">
+                <br/><br/>
+            <h:form>
+                 <br/><br/>
+                <h:inputHidden value="#{Admin.payment_detail_id}" />
+                Payment Mode : <h:selectOneMenu value="#{Admin.payment_id}" >
+                    <f:selectItem itemValue="0" itemLabel="Select Payment Mode" />
+                    <c:forEach var="payment" items="#{Admin.payment}">
+                        <f:selectItem itemValue="#{payment.paymentId}" itemLabel="#{payment.paymentMode}" />
+                    </c:forEach>
+                </h:selectOneMenu><br /><br />
+                CVV : <h:inputText value="#{Admin.cvv}" /><br /><br />
+                Bank Name : <h:inputText value="#{Admin.bank_name}" /><br /><br />
+                IFSC Code : <h:inputText value="#{Admin.ifsc_code}" /><br /><br />
+                
+                <h:commandButton value="Insert" action="#{Admin.addPaymentDetail()}" /><br /><br />
+                <table border="2" width="50%">
+                    
+                    <tr>
+                        <th>Payment Detail Id</th>
+                        <th>payment Mode</th>
+                        <th>CVV</th>
+                        <th>Bank Name</th>
+                        <th>IFSC Code</th>
+                        <th>Action</th>
+                    </tr>
+                    <c:forEach var="paymentdetail" items="#{Admin.paymentdetail}">
+                        <tr>
+                            <td>#{paymentdetail.paymentDetailId}</td>
+                            <td>#{paymentdetail.paymentId.paymentMode}</td>
+                            <td>#{paymentdetail.cvv}</td>
+                            <td>#{paymentdetail.bankName}</td> 
+                            <td>#{paymentdetail.ifscCode}</td>
+                            <td>
+                                <h:commandLink value="Edit" action="#{Admin.updatePaymentDetail(paymentdetail.paymentDetailId)}" /> &nbsp;&nbsp;&nbsp;
+                                <h:commandLink value="Delete" action="#{Admin.removePaymentDetail(paymentdetail.paymentDetailId)}" />
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </h:form>
+                 </font>
+        </center>
+    </h:body>
+</html>

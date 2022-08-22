@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <ui:include src="../admin/Css.xhtml"></ui:include>
+        <ui:include src="../admin/Script.xhtml"></ui:include>
+        <ui:include src="../admin/SlidebarHeader.xhtml"></ui:include>
+        <ui:include src="../admin/Footer.xhtml"></ui:include>
+    </h:head>
+    <h:body>
+       
+       
+        <center>
+              <br/> <br/>
+            <font size="4">
+                <br/><br/>
+         
+        <h:form>
+          Description : <h:inputText value="#{Admin.description}"/><br/><br/>
+            <h:inputHidden value="#{Admin.rules_id}"/>
+            <h:commandButton value="insert" action="#{Admin.addRules()}"/>
+        </h:form>
+                <br/>
+            <h1>Show Rules</h1>
+        <h:form>
+            <h:dataTable var="rules" value="#{Admin.rule}" border="2" width="40%">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel>Rules Id</h:outputLabel>
+                        
+                    </f:facet>
+                    <h:outputText value="#{rules.rulesId}"/>
+                </h:column>
+                
+              
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel> Description </h:outputLabel>
+                        
+                    </f:facet>
+                    <h:outputText value="#{rules.description}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel>Edit</h:outputLabel>
+                        
+                    </f:facet>
+                    <h:commandLink action="#{Admin.updateRules(rules.rulesId)}">Edit</h:commandLink>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel>Delete</h:outputLabel>
+                        
+                    </f:facet>
+                    <h:commandLink action="#{Admin.removeRules(rules.rulesId)}">Delete</h:commandLink>
+                </h:column>
+                
+            </h:dataTable>
+        </h:form> 
+            </font>
+        </center>
+    </h:body>
+</html>
+

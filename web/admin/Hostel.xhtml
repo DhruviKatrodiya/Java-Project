@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <ui:include src="../admin/Css.xhtml"></ui:include>
+        <ui:include src="../admin/Script.xhtml"></ui:include>
+        <ui:include src="../admin/SlidebarHeader.xhtml"></ui:include>
+        <ui:include src="../admin/Footer.xhtml"></ui:include>
+    </h:head>                                   
+    <h:body>
+        <center>
+            <br/> <br/>
+            <font size="4">
+                <br/> <br/>
+            <h:form>
+                
+                <h:inputHidden value="#{Admin.hostel_id}" />
+                Hostel Name : <h:inputText value="#{Admin.hostel_name}" /><br /><br />
+                City  : <h:selectOneMenu value="#{Admin.city_id}" >
+                    <f:selectItem itemValue="0" itemLabel="Select City" />
+                    <c:forEach var="city" items="#{Admin.citymaster}">
+                        <f:selectItem itemValue="#{city.cityId}" itemLabel="#{city.cityName}" />
+                    </c:forEach>
+                </h:selectOneMenu><br /><br />
+                State  : <h:selectOneMenu value="#{Admin.state_id}" >
+                    <f:selectItem itemValue="0" itemLabel="Select State" />
+                    <c:forEach var="statemaster" items="#{Admin.state}">
+                        <f:selectItem itemValue="#{statemaster.stateId}" itemLabel="#{statemaster.stateName}" />
+                    </c:forEach>
+                </h:selectOneMenu><br /><br />
+                Phone No : <h:inputText value="#{Admin.phone_no}" /><br /><br />
+                Category  : <h:selectOneMenu value="#{Admin.category_id}" >
+                    <f:selectItem itemValue="0" itemLabel="Select Category" />
+                    <c:forEach var="category" items="#{Admin.category}">
+                        <f:selectItem itemValue="#{category.categoryId}" itemLabel="#{category.categoryType}" />
+                    </c:forEach>
+                </h:selectOneMenu><br /><br />
+                
+                <h:commandButton value="Insert" action="#{Admin.addHostel()}" /><br /><br />
+                <table border="2" width="60%">
+                    
+                    <tr>
+                        <th>Hostel Id</th>
+                        <th>Hostel Name</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Phone No</th>
+                        <th>Category Type</th>
+                        <th>Action</th>
+                    </tr>
+                    <c:forEach var="hostel" items="#{Admin.hostel}">
+                        <tr>
+                            <td>#{hostel.hostelId}</td>
+                            <td>#{hostel.hostelName}</td>
+                            <td>#{hostel.cityId.cityName}</td>
+                            <td>#{hostel.stateId.stateName}</td>
+                            <td>#{hostel.phoneNo}</td> 
+                            <td>#{hostel.categoryId.categoryType}</td>
+                            <td>
+                                <h:commandLink value="Edit" action="#{Admin.updateHostel(hostel.hostelId)}" /> &nbsp;&nbsp;&nbsp;
+                                <h:commandLink value="Delete" action="#{Admin.removeHostel(hostel.hostelId)}" />
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </h:form>
+                 </font>
+        </center>
+    </h:body>
+</html>
